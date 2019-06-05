@@ -137,6 +137,7 @@ class PayParam {
 
 /// 결제요청 결과
 class PayResult {
+  String status;
   String action;
   String receiptId;
   num amount;
