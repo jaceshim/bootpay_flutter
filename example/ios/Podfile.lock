@@ -1,0 +1,37 @@
+PODS:
+  - bootpay_flutter (0.0.1):
+    - DCKeyValueObjectMapping
+    - Flutter
+    - SwiftyBootpay (= 2.1.18)
+  - CryptoSwift (1.0.0)
+  - DCKeyValueObjectMapping (1.5)
+  - Flutter (1.0.0)
+  - SwiftyBootpay (2.1.18):
+    - CryptoSwift
+
+DEPENDENCIES:
+  - bootpay_flutter (from `.symlinks/plugins/bootpay_flutter/ios`)
+  - Flutter (from `.symlinks/flutter/ios`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - CryptoSwift
+    - DCKeyValueObjectMapping
+    - SwiftyBootpay
+
+EXTERNAL SOURCES:
+  bootpay_flutter:
+    :path: ".symlinks/plugins/bootpay_flutter/ios"
+  Flutter:
+    :path: ".symlinks/flutter/ios"
+
+SPEC CHECKSUMS:
+  bootpay_flutter: 0a62f16e13b1b05cc598a19c2ccef125a777fbdb
+  CryptoSwift: d81eeaa59dc5a8d03720fe919a6fd07b51f7439f
+  DCKeyValueObjectMapping: c2eb5a6529da100b2e49ef6a599663578051f077
+  Flutter: 9d0fac939486c9aba2809b7982dfdbb47a7b0296
+  SwiftyBootpay: d05eedd055094c0490f99bd6f850085ae352bea7
+
+PODFILE CHECKSUM: 58760ca3c5878cb71ae11bd6eeff33fd4ce06e4f
+
+COCOAPODS: 1.5.3
