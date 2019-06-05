@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
-import 'package:meta/meta.dart';
 
 /// Bootpay payment modules for Flutter
 class BootpayFlutter {
@@ -82,15 +81,15 @@ class PayParam {
   Extra extra;
 
   PayParam(
-      {@required this.price,
-      @required this.applicationId,
-      @required this.name,
+      {this.price,
+      this.applicationId,
+      this.name,
       this.pg = "",
       this.method = "",
       this.showAgreeWindow = false,
       this.items = const [],
-      @required this.userInfo,
-      @required this.orderId,
+      this.userInfo,
+      this.orderId,
       this.params,
       this.accountExpireAt,
       this.extra});
@@ -205,7 +204,7 @@ class UserInfo {
   /// 사용자 휴대폰 번호
   String phone;
 
-  UserInfo({@required this.username, @required this.email, this.addr, this.phone});
+  UserInfo({this.username, this.email, this.addr, this.phone});
 
   UserInfo.fromJson(Map<String, dynamic> json)
       : this.username = json["username"],
