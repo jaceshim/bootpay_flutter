@@ -13,7 +13,7 @@ dependencies:
 ```
 And install it using ``flutter packages get`` on your project folder. After that, just import the module and use it:
 
-##Settings
+## Settings
 
 ### Android
 No configuration required.
