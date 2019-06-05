@@ -1,9 +1,6 @@
 import 'dart:async';
 
 import 'package:bootpay_flutter/bootpay_flutter.dart';
-import 'package:bootpay_flutter/src/pay_param.dart';
-import 'package:bootpay_flutter/src/pay_result.dart';
-import 'package:bootpay_flutter/src/user_info.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
