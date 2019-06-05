@@ -161,6 +161,7 @@ class PayResult {
   String requestedAt;
 
   PayResult({
+    this.status,
     this.action,
     this.receiptId,
     this.amount,
@@ -186,7 +187,7 @@ class PayResult {
 
   @override
   String toString() {
-    return 'PayResult{action: $action, receiptId: $receiptId, amount: $amount, cardNo: $cardNo, cardCode: $cardCode, cardName: $cardName, cardQuota: $cardQuota, params: $params, itemName: $itemName, orderId: $orderId, url: $url, price: $price, taxFee: $taxFee, paymentName: $paymentName, pgName: $pgName, pg: $pg, method: $method, methodName: $methodName, paymentGroup: $paymentGroup, paymentGroupName: $paymentGroupName, requestedAt: $requestedAt}';
+    return 'PayResult{status: $status, action: $action, receiptId: $receiptId, amount: $amount, cardNo: $cardNo, cardCode: $cardCode, cardName: $cardName, cardQuota: $cardQuota, params: $params, itemName: $itemName, orderId: $orderId, url: $url, price: $price, taxFee: $taxFee, paymentName: $paymentName, pgName: $pgName, pg: $pg, method: $method, methodName: $methodName, paymentGroup: $paymentGroup, paymentGroupName: $paymentGroupName, requestedAt: $requestedAt}';
   }
 }
 
