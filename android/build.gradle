@@ -39,6 +39,11 @@ apply plugin: 'com.android.library'
 android {
     compileSdkVersion 28
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     defaultConfig {
         minSdkVersion 23
         targetSdkVersion 28
@@ -52,5 +57,4 @@ android {
 dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.github.bootpay:client_android_java:2.14'
-//    implementation 'com.google.android.gms:play-services:+'
 }

@@ -6,3 +6,4 @@
 bootpay_flutter.iml
 build/
 android/.gradle/
+android/gradle/

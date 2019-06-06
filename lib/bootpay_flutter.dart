@@ -5,7 +5,8 @@ import 'package:flutter/services.dart';
 
 /// Bootpay payment modules for Flutter
 class BootpayFlutter {
-  static const MethodChannel _channel = const MethodChannel('jaceshim/bootpay_flutter');
+  static const MethodChannel _channel =
+      const MethodChannel('jaceshim/bootpay_flutter');
 
   static Future<PayResult> pay(PayParam payParam) async {
     final Map<dynamic, dynamic> result = await _channel.invokeMethod(
@@ -101,7 +102,8 @@ class PayParam {
         this.pg = json["pg"],
         this.method = json["method"],
         this.showAgreeWindow = json["showAgreeWindow"],
-        this.items = (json["items"] as List).map((i) => Item.fromJson(i)).toList(),
+        this.items =
+            (json["items"] as List).map((i) => Item.fromJson(i)).toList(),
         this.userInfo = UserInfo.fromJson(json["userInfo"]),
         this.orderId = json["orderId"],
         this.params = jsonDecode(json["params"]),
@@ -248,7 +250,14 @@ class Item {
   /// 대표상품의 카테고리 하, 50글자 이내
   String cat3;
 
-  Item({this.itemName, this.qty, this.unique, this.price, this.cat1, this.cat2, this.cat3});
+  Item(
+      {this.itemName,
+      this.qty,
+      this.unique,
+      this.price,
+      this.cat1,
+      this.cat2,
+      this.cat3});
 
   Item.fromJson(Map<String, dynamic> json)
       : this.itemName = json["itemName"],
