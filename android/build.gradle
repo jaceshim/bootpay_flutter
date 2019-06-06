@@ -52,5 +52,5 @@ android {
 dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.github.bootpay:client_android_java:2.14'
-    implementation 'com.google.android.gms:play-services:+'
+//    implementation 'com.google.android.gms:play-services:+'
 }
