@@ -6,6 +6,10 @@ package jaceshim.bootpay_flutter;
  */
 public class Constans {
     /**
+     * 결제처리시 결과처리 onActivityResult에서 결제처리를 구분하기 위한 용도로 사용함.
+     */
+    public static final int PAY_ACTIVITY_REQ_CODE = 90;
+    /**
      * {@link BootpayActivity} 호출시 req를 구분짖기 위해 {@link android.content.Intent}로 전달될 파라미터값의 key
      */
     public static final String REQ_CODE_KEY = "reqCode";

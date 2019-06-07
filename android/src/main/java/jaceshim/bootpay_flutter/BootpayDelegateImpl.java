@@ -8,6 +8,7 @@ import io.flutter.plugin.common.PluginRegistry;
 
 import java.util.Map;
 
+import static jaceshim.bootpay_flutter.Constans.PAY_ACTIVITY_REQ_CODE;
 import static jaceshim.bootpay_flutter.Constans.PAY_RESULT_DATA_KEY;
 
 /**
@@ -26,16 +27,18 @@ public class BootpayDelegateImpl implements BootpayDelegate, PluginRegistry.Acti
 
     @Override
     public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d(TAG, "결제처리 요청코드 " + requestCode);
-        Log.d(TAG, "결제처리 결과코드 " + resultCode);
+        if (requestCode == PAY_ACTIVITY_REQ_CODE) {
+            Log.d(TAG, "결제처리 요청코드 " + requestCode);
+            Log.d(TAG, "결제처리 결과코드 " + resultCode);
 
-        final String rawResultData = data.getStringExtra(PAY_RESULT_DATA_KEY);
-        Log.d(TAG, "결제처리 결과 " + rawResultData);
-        if (rawResultData != null) {
-            Map<String, Object> resultDada = new Gson().fromJson(rawResultData, Map.class);
-            finishWithSuccess(resultDada);
-        } else {
-            finishWithError("결제응답값 없음", "결제응답값 없음");
+            final String rawResultData = data.getStringExtra(PAY_RESULT_DATA_KEY);
+            Log.d(TAG, "결제처리 결과 " + rawResultData);
+            if (rawResultData != null) {
+                Map<String, Object> resultDada = new Gson().fromJson(rawResultData, Map.class);
+                finishWithSuccess(resultDada);
+            } else {
+                finishWithError("결제응답값 없음", "결제응답값 없음");
+            }
         }
 
         return true;
@@ -53,7 +56,7 @@ public class BootpayDelegateImpl implements BootpayDelegate, PluginRegistry.Acti
         final Intent intent = new Intent(this.registrar.activity(), BootpayActivity.class);
         intent.putExtra(Constans.PAY_PARAM_KEY, new Gson().toJson(params));
         intent.putExtra(Constans.REQ_CODE_KEY, Constans.PaymentReqCode.PAY.getCode());
-        this.registrar.activity().startActivityForResult(intent, 90);
+        this.registrar.activity().startActivityForResult(intent, PAY_ACTIVITY_REQ_CODE);
     }
 
     @Override

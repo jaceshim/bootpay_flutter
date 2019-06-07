@@ -137,6 +137,6 @@ public class BootpayActivity extends BootpayFlutterActivity {
         resultIntent.putExtra(PAY_RESULT_DATA_KEY, message);
 
         // result code는 의미 없음
-        setResult(90, resultIntent);
+        setResult(900, resultIntent);
     }
 }
