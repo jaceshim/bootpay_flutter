@@ -8,7 +8,7 @@ Add the module to your project ``pubspec.yaml``:
 ...
 dependencies:
  ...
- bootpay_flutter: ^0.0.1
+ bootpay_flutter: ^0.0.2
 ...
 ```
 And install it using ``flutter packages get`` on your project folder. After that, just import the module and use it:
@@ -19,7 +19,7 @@ And install it using ``flutter packages get`` on your project folder. After that
 No configuration required.
 
 ### iOS
-**\<your project root\>/ios/Runner/Info.plist**
+**<your project root>/ios/Runner/Info.plist**
 
 ```xml
 <key>NSAppTransportSecurity</key>
