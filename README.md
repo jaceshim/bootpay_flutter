@@ -8,7 +8,7 @@ Add the module to your project ``pubspec.yaml``:
 ...
 dependencies:
  ...
- bootpay_flutter: ^0.0.4
+ bootpay_flutter: ^0.0.5
 ...
 ```
 And install it using ``flutter packages get`` on your project folder. After that, just import the module and use it:
@@ -89,13 +89,13 @@ class _MyAppState extends State<MyApp> {
       final PayResult result = await BootpayFlutter.pay(payParam);
       if (result.action == "BootpayDone") {
         // 결제성공
-        print("사용자 결제 성공");
+        print("결제 성공");
       } else if (result.action == "BootpayCancel") {
         // 사용자가 결제완료전에 결제를 중지한 상태.
         print("사용자 결제 취소");
       } else if (result.action == "BootpayError") {
         // 결제에러
-        print("사용자 결제 성공");
+        print("결제 에러");
       }
       paymentResult = result.toString();
     } on Exception {

@@ -1,3 +1,6 @@
+## [0.0.5]
+* README example 오타 수정 ( ╥﹏╥) ノシ
+
 ## [0.0.4]
 * README example 오타 수정.
 
