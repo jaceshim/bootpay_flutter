@@ -19,10 +19,6 @@ public class Constans {
     public static final String PAY_PARAM_KEY = "payParams";
 
     /**
-     * {@link BootpayActivity}에서 결제관련 처리 이후 {@link android.content.Intent} 로 전달될 결과코드의 key
-     */
-    public static final String PAY_RESULT_CODE_KEY = "payResultCode";
-    /**
      * {@link BootpayActivity}에서 결제관련 처리 이후 {@link android.content.Intent} 로 전달될 결과값의 key
      */
     public static final String PAY_RESULT_DATA_KEY = "payResultData";

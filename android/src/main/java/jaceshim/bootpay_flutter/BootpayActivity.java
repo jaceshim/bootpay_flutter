@@ -13,8 +13,8 @@ import kr.co.bootpay.enums.Method;
 
 import java.util.Objects;
 
-import static jaceshim.bootpay_flutter.Constans.*;
-import static jaceshim.bootpay_flutter.Constans.PaymentResultCode.*;
+import static jaceshim.bootpay_flutter.Constans.PAY_PARAM_KEY;
+import static jaceshim.bootpay_flutter.Constans.PAY_RESULT_DATA_KEY;
 
 /**
  * 결제화면 Activity
@@ -40,7 +40,6 @@ public class BootpayActivity extends BootpayFlutterActivity {
 
     @Override
     public void onBackPressed() {
-        bindResult(CANCEL.getCode(), "payment stop by user");
         // back버튼 터치시 결제를 중지 상태로 처리한다. 밑에 super.onBackPressed() 결과값 설정보다 먼저 호출하면 결과값 설정이 안되니 주의요망!
         super.onBackPressed();
     }
@@ -96,14 +95,14 @@ public class BootpayActivity extends BootpayFlutterActivity {
     @Override
     public void onError(String message) {
         Log.d("bootpay  error", message);
-        bindResult(ERROR.getCode(), message);
+        bindResult(message);
         this.finish();
     }
 
     @Override
     public void onCancel(String message) {
         Log.d("bootpay  cancel", message);
-        bindResult(CANCEL.getCode(), message);
+        bindResult(message);
         this.finish();
     }
 
@@ -127,13 +126,12 @@ public class BootpayActivity extends BootpayFlutterActivity {
     @Override
     public void onDone(String message) {
         Log.d("bootpay  done", message);
-        bindResult(SUCCESS.getCode(), message);
+        bindResult(message);
         this.finish();
     }
 
-    void bindResult(int paymentResultCode, String message) {
+    void bindResult(String message) {
         Intent resultIntent = new Intent();
-        resultIntent.putExtra(PAY_RESULT_CODE_KEY, paymentResultCode);
         resultIntent.putExtra(PAY_RESULT_DATA_KEY, message);
 
         // result code는 의미 없음

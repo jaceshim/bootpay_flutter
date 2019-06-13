@@ -9,9 +9,6 @@ import io.flutter.plugin.common.PluginRegistry;
 import java.util.Map;
 
 import static jaceshim.bootpay_flutter.Constans.*;
-import static jaceshim.bootpay_flutter.Constans.PAY_ACTIVITY_REQ_CODE;
-import static jaceshim.bootpay_flutter.Constans.PAY_RESULT_CODE_KEY;
-import static jaceshim.bootpay_flutter.Constans.PAY_RESULT_DATA_KEY;
 
 /**
  * bootpay delegate concreate class
@@ -37,8 +34,6 @@ public class BootpayDelegateImpl implements BootpayDelegate, PluginRegistry.Acti
             Log.d(TAG, "결제처리 결과 " + rawResultData);
             if (rawResultData != null) {
                 Map<String, Object> resultDada = new Gson().fromJson(rawResultData, Map.class);
-                final int paymentResultCode = data.getIntExtra(PAY_RESULT_CODE_KEY, PaymentResultCode.ERROR.getCode());
-                resultDada.put("status", PaymentResultCode.of(paymentResultCode).name());
                 finishWithSuccess(resultDada);
             } else {
                 finishWithError("결제응답값 없음", "결제응답값 없음");
