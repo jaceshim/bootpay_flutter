@@ -8,6 +8,7 @@ import io.flutter.plugin.common.PluginRegistry;
 
 import java.util.Map;
 
+import static jaceshim.bootpay_flutter.Constans.*;
 import static jaceshim.bootpay_flutter.Constans.PAY_ACTIVITY_REQ_CODE;
 import static jaceshim.bootpay_flutter.Constans.PAY_RESULT_CODE_KEY;
 import static jaceshim.bootpay_flutter.Constans.PAY_RESULT_DATA_KEY;
@@ -36,6 +37,8 @@ public class BootpayDelegateImpl implements BootpayDelegate, PluginRegistry.Acti
             Log.d(TAG, "결제처리 결과 " + rawResultData);
             if (rawResultData != null) {
                 Map<String, Object> resultDada = new Gson().fromJson(rawResultData, Map.class);
+                final int paymentResultCode = data.getIntExtra(PAY_RESULT_CODE_KEY, PaymentResultCode.ERROR.getCode());
+                resultDada.put("status", PaymentResultCode.of(paymentResultCode).name());
                 finishWithSuccess(resultDada);
             } else {
                 finishWithError("결제응답값 없음", "결제응답값 없음");
@@ -55,8 +58,8 @@ public class BootpayDelegateImpl implements BootpayDelegate, PluginRegistry.Acti
         Log.d(TAG, "결제요청 파라미터 : " + params.toString());
 
         final Intent intent = new Intent(this.registrar.activity(), BootpayActivity.class);
-        intent.putExtra(Constans.PAY_PARAM_KEY, new Gson().toJson(params));
-        intent.putExtra(Constans.REQ_CODE_KEY, Constans.PaymentReqCode.PAY.getCode());
+        intent.putExtra(PAY_PARAM_KEY, new Gson().toJson(params));
+        intent.putExtra(REQ_CODE_KEY, PaymentReqCode.PAY.getCode());
         this.registrar.activity().startActivityForResult(intent, PAY_ACTIVITY_REQ_CODE);
     }
 
@@ -69,10 +72,6 @@ public class BootpayDelegateImpl implements BootpayDelegate, PluginRegistry.Acti
      * Flutter MethodChannel로 성공 응답을 전달한다.
      */
     private void finishWithSuccess(Map<String, Object> resultDada) {
-        int resultCodeKey = (int) resultDada.get(PAY_RESULT_CODE_KEY);
-        Constans.PaymentResultCode paymentResultCode = Constans.PaymentResultCode.of(resultCodeKey);
-        resultDada.put("status", paymentResultCode.name());
-
         System.out.println("success data : " + resultDada.toString());
         this.methodChannelResult.success(resultDada);
     }
