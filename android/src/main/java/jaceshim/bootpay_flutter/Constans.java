@@ -6,6 +6,10 @@ package jaceshim.bootpay_flutter;
  */
 public class Constans {
     /**
+     * 결제처리시 결과처리 onActivityResult에서 결제처리를 구분하기 위한 용도로 사용함.
+     */
+    public static final int PAY_ACTIVITY_REQ_CODE = 90;
+    /**
      * {@link BootpayActivity} 호출시 req를 구분짖기 위해 {@link android.content.Intent}로 전달될 파라미터값의 key
      */
     public static final String REQ_CODE_KEY = "reqCode";
@@ -14,10 +18,6 @@ public class Constans {
      */
     public static final String PAY_PARAM_KEY = "payParams";
 
-    /**
-     * {@link BootpayActivity}에서 결제관련 처리 이후 {@link android.content.Intent} 로 전달될 결과코드의 key
-     */
-    public static final String PAY_RESULT_CODE_KEY = "payResultCode";
     /**
      * {@link BootpayActivity}에서 결제관련 처리 이후 {@link android.content.Intent} 로 전달될 결과값의 key
      */
@@ -50,9 +50,17 @@ public class Constans {
         PaymentResultCode(int code) {
             this.code = code;
         }
-
         public int getCode() {
             return this.code;
+        }
+
+        static PaymentResultCode of(int code) {
+            for (PaymentResultCode paymentResultCode : PaymentResultCode.values()) {
+                if (paymentResultCode.getCode() == code) {
+                    return paymentResultCode;
+                }
+            }
+            throw new IllegalStateException("PaymentResultCode not found : " + code);
         }
     }
 }
