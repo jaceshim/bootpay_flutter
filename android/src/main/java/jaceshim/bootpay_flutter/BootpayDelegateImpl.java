@@ -9,6 +9,7 @@ import io.flutter.plugin.common.PluginRegistry;
 import java.util.Map;
 
 import static jaceshim.bootpay_flutter.Constans.PAY_ACTIVITY_REQ_CODE;
+import static jaceshim.bootpay_flutter.Constans.PAY_RESULT_CODE_KEY;
 import static jaceshim.bootpay_flutter.Constans.PAY_RESULT_DATA_KEY;
 
 /**
@@ -67,9 +68,13 @@ public class BootpayDelegateImpl implements BootpayDelegate, PluginRegistry.Acti
     /**
      * Flutter MethodChannel로 성공 응답을 전달한다.
      */
-    private void finishWithSuccess(Object data) {
-        System.out.println("success data : " + data.toString());
-        this.methodChannelResult.success(data);
+    private void finishWithSuccess(Map<String, Object> resultDada) {
+        int resultCodeKey = (int) resultDada.get(PAY_RESULT_CODE_KEY);
+        Constans.PaymentResultCode paymentResultCode = Constans.PaymentResultCode.of(resultCodeKey);
+        resultDada.put("status", paymentResultCode.name());
+
+        System.out.println("success data : " + resultDada.toString());
+        this.methodChannelResult.success(resultDada);
     }
 
     /**

@@ -54,9 +54,17 @@ public class Constans {
         PaymentResultCode(int code) {
             this.code = code;
         }
-
         public int getCode() {
             return this.code;
+        }
+
+        static PaymentResultCode of(int code) {
+            for (PaymentResultCode paymentResultCode : PaymentResultCode.values()) {
+                if (paymentResultCode.getCode() == code) {
+                    return paymentResultCode;
+                }
+            }
+            throw new IllegalStateException("PaymentResultCode not found : " + code);
         }
     }
 }
