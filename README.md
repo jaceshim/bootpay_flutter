@@ -8,7 +8,7 @@ Add the module to your project ``pubspec.yaml``:
 ...
 dependencies:
  ...
- bootpay_flutter: ^0.0.3
+ bootpay_flutter: ^0.0.4
 ...
 ```
 And install it using ``flutter packages get`` on your project folder. After that, just import the module and use it:
@@ -19,7 +19,7 @@ And install it using ``flutter packages get`` on your project folder. After that
 No configuration required.
 
 ### iOS
-**<your project root>/ios/Runner/Info.plist**
+** {your project root}/ios/Runner/Info.plist **
 
 ```xml
 <key>NSAppTransportSecurity</key>
@@ -87,12 +87,15 @@ class _MyAppState extends State<MyApp> {
 
     try {
       final PayResult result = await BootpayFlutter.pay(payParam);
-      if (result.status == "SUCCESS") {
+      if (result.action == "BootpayDone") {
         // 결제성공
-      } else if (result.status == "CANCEL") {
+        print("사용자 결제 성공");
+      } else if (result.action == "BootpayCancel") {
         // 사용자가 결제완료전에 결제를 중지한 상태.
-      } else if (result.status == "ERROR") {
+        print("사용자 결제 취소");
+      } else if (result.action == "BootpayError") {
         // 결제에러
+        print("사용자 결제 성공");
       }
       paymentResult = result.toString();
     } on Exception {

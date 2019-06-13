@@ -1,3 +1,6 @@
+## [0.0.4]
+* README example 오타 수정.
+
 ## [0.0.3]
 * 결제상태 처리를 bootpay의 action으로 대체.
 * README example 수정.
