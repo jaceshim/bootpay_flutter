@@ -92,20 +92,15 @@ class BootpayViewController: UIViewController {
 extension BootpayViewController: BootpayRequestProtocol {
     // 에러가 났을때 호출되는 부분
     func onError(data: [String: Any]) {
-        self.payResult = buildResults(data: data, status: "ERROR")
-        print("BootpayViewController Error : ", data)
+        buildResults(data: data)
     }
 
     // 가상계좌 입금 계좌번호가 발급되면 호출되는 함수입니다.
     func onReady(data: [String: Any]) {
-        print("BootpayViewController ready")
-        print(data)
     }
 
     // 결제가 진행되기 바로 직전 호출되는 함수로, 주로 재고처리 등의 로직이 수행
     func onConfirm(data: [String: Any]) {
-        print(data)
-
         let iWantPay = true
         if iWantPay == true {  // 재고가 있을 경우.
             vc.transactionConfirm(data: data) // 결제 승인
@@ -116,21 +111,17 @@ extension BootpayViewController: BootpayRequestProtocol {
 
     // 결제 취소시 호출
     func onCancel(data: [String: Any]) {
-        self.payResult = buildResults(data: data, status: "CANCEL")
-        print("BootpayViewController Cancel", data)
+        buildResults(data: data)
     }
 
     // 결제완료시 호출
     // 아이템 지급 등 데이터 동기화 로직을 수행합니다
     func onDone(data: [String: Any]) {
-        self.payResult = buildResults(data: data, status: "SUCCESS")
-        print("BootpayViewController onDone")
-        print(data)
+        buildResults(data: data)
     }
 
     //결제창이 닫힐때 실행되는 부분
     func onClose() {
-        print("BootpayViewController close")
         vc.dismiss() //결제창 종료
         // 이전화면으로
 
@@ -138,18 +129,13 @@ extension BootpayViewController: BootpayRequestProtocol {
 //        let ad = UIApplication.shared.delegate as? AppDelegate
 //        ad?.payResult = self.payResult
 
-
         self.flutterResult?(self.payResult)
-
 
         // 이전 화면으로 복귀한다.
         self.presentingViewController?.dismiss(animated: true)
     }
 
-    func buildResults(data: Dictionary<String, Any>, status: String) -> Dictionary<String, Any> {
-        var results = data
-        results["status"] = status
-
-        return results
+    func buildResults(data: Dictionary<String, Any>) {
+        self.payResult = data
     }
 }

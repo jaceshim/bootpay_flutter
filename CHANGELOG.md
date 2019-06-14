@@ -1,3 +1,7 @@
+## [0.0.6]
+* android back button 터치시 사용자에 의한 취소로 처리되게 수정함.
+* ios 결제값 return로직 변경
+
 ## [0.0.5]
 * README example 오타 수정 ( ╥﹏╥) ノシ
 
