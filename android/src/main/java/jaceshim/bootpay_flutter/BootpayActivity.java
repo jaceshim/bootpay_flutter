@@ -64,10 +64,10 @@ public class BootpayActivity extends BootpayFlutterActivity {
         int paymentAmount = Integer.parseInt(Objects.requireNonNull(params.getPrice()));
 
         final BootpayBuilder bootpayBuilder = Bootpay.init(getFragmentManager())
+                .setContext(this)
                 .setApplicationId(bootpayId) // 해당 프로젝트(안드로이드)의 application id 값
                 .setPG(params.getPg()) // 결제할 PG 사
                 .setMethod(getPaymentMethod(params.getMethod())) // 결제수단
-                //.isShowAgree(true)
                 .setName(params.getName()) // 결제할 상품명
                 .setOrderId(params.getOrderId()) // 결제 고유번호
                 .setPrice(paymentAmount) // 결제할 금액

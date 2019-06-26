@@ -1,3 +1,6 @@
+## [0.0.8]
+* bootpay 미지원 method 주석처리
+
 ## [0.0.7]
 * changed bootpay version for android
 * ignored .vscode directory
