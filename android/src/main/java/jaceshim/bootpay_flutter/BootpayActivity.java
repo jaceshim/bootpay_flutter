@@ -73,9 +73,9 @@ public class BootpayActivity extends BootpayFlutterActivity {
                 .setPrice(paymentAmount) // 결제할 금액
                 .setItems(params.getItems())
                 .setBootUser(params.getUserInfo())
-                .setBootExtra(params.getExtra())
+                .setBootExtra(params.getExtra());
 //                .setParams(params.getParams())
-                .isShowAgree(params.isShowAgreeWindow());
+                // .isShowAgree(params.isShowAgreeWindow());
 
         final String accountExpireAt = params.getAccountExpireAt();
         if (accountExpireAt != null && ! accountExpireAt.isEmpty()) {
