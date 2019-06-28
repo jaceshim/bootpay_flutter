@@ -26,6 +26,7 @@ public class BootpayDelegateImpl implements BootpayDelegate, PluginRegistry.Acti
 
     @Override
     public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PAY_ACTIVITY_REQ_CODE) {
             Log.d(TAG, "결제처리 요청코드 " + requestCode);
             Log.d(TAG, "결제처리 결과코드 " + resultCode);
