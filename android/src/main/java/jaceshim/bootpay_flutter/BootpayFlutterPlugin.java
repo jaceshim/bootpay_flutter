@@ -14,9 +14,7 @@ import io.flutter.plugin.common.PluginRegistry.Registrar;
 
 import java.util.Map;
 
-import static jaceshim.bootpay_flutter.Constans.PAY_ACTIVITY_REQ_CODE;
-import static jaceshim.bootpay_flutter.Constans.PAY_PARAM_KEY;
-import static jaceshim.bootpay_flutter.Constans.REQ_CODE_KEY;
+import static jaceshim.bootpay_flutter.Constans.*;
 
 /**
  * BootpayFlutterPlugin
@@ -27,6 +25,7 @@ public class BootpayFlutterPlugin implements MethodCallHandler, PluginRegistry.A
     private static final String CHANNEL_NAME = "jaceshim/bootpay_flutter";
     private Activity activity;
     private Context context;
+    private MethodChannel.Result methodChannelResult;
 
     private BootpayFlutterPlugin(Activity activity, Context activeContext) {
         this.activity = activity;
@@ -42,6 +41,7 @@ public class BootpayFlutterPlugin implements MethodCallHandler, PluginRegistry.A
 
     @Override
     public void onMethodCall(MethodCall methodCall, Result result) {
+        this.methodChannelResult = result;
         Map<String, Object> params = methodCall.arguments();
         switch (methodCall.method) {
             case "doPay":
@@ -62,7 +62,38 @@ public class BootpayFlutterPlugin implements MethodCallHandler, PluginRegistry.A
     }
 
     @Override
-    public boolean onActivityResult(int i, int i1, Intent intent) {
-        return false;
+    public boolean onActivityResult(int requestCode, int resultCode, Intent intent) {
+        Log.d(TAG, "결제처리 요청코드 " + requestCode);
+        Log.d(TAG, "결제처리 결과코드 " + resultCode);
+
+        try {
+            final String rawResultData = intent.getStringExtra(PAY_RESULT_DATA_KEY);
+            Log.d(TAG, "결제처리 결과 " + rawResultData);
+            if (rawResultData != null) {
+                Map<String, Object> resultDada = new Gson().fromJson(rawResultData, Map.class);
+                finishWithSuccess(resultDada);
+            } else {
+                finishWithError("결제응답값 없음", "결제응답값 없음");
+            }
+        } catch (Exception e) {
+            finishWithError("결제처리 에러", e.getMessage());
+            Log.e(TAG, "bootpay 결제처리 오류 : " + e.getMessage(), e);
+        }
+        return true;
     }
+
+    /**
+     * Flutter MethodChannel로 성공 응답을 전달한다.
+     */
+    private void finishWithSuccess(Map<String, Object> resultDada) {
+        System.out.println("success data : " + resultDada.toString());
+        this.methodChannelResult.success(resultDada);
+    }
+
+    /**
+     * Flutter MethodChannel로 에러(실패) 응답을 전달한다.
+     */
+    private void finishWithError(String errorCode, String errorMessage) {
+        this.methodChannelResult.error(errorCode, errorMessage, null);
+    }    
 }
