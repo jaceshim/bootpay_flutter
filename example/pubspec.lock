@@ -21,7 +21,11 @@ packages:
       path: ".."
       relative: true
     source: path
+<<<<<<< HEAD
     version: "0.0.8"
+=======
+    version: "0.0.3"
+>>>>>>> develop
   charcode:
     dependency: transitive
     description:

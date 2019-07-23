@@ -42,10 +42,13 @@ public class BootpayActivity extends BootpayFlutterActivity {
 
     @Override
     public void onBackPressed() {
+<<<<<<< HEAD
         Map<String, String> data = new HashMap<>();
         // 결제완료전 back버튼 터치시 사용자 결제취소로 처리.
         data.put("action", "BootpayCancel");
         bindResult(new Gson().toJson(data));
+=======
+>>>>>>> develop
         // back버튼 터치시 결제를 중지 상태로 처리한다. 밑에 super.onBackPressed() 결과값 설정보다 먼저 호출하면 결과값 설정이 안되니 주의요망!
         super.onBackPressed();
     }
@@ -53,6 +56,11 @@ public class BootpayActivity extends BootpayFlutterActivity {
     @Override
     protected void onPostResume() {
         super.onPostResume();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     private void bootpayRequest(PayParam params) {
