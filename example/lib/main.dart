@@ -17,11 +17,9 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    initPlatformState();
   }
 
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
+  Future<void> doPay() async {
     String bootpayApplicationId;
     if (Platform.isAndroid) {
       bootpayApplicationId = "59a4d326396fa607cbe75de5"; // 안드로이드용 bootpay applicationId
@@ -64,13 +62,23 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Bootpay flutter example app'),
-        ),
-        body: Center(
-          child: Text('Payment Result : $_paymentResult'),
-        ),
-      ),
+          appBar: AppBar(
+            title: const Text('Bootpay flutter example app'),
+          ),
+          body: Column(
+            children: <Widget>[
+              Center(
+                child: Text('Payment Result : $_paymentResult'),
+              ),
+              SizedBox(height: 10),
+              MaterialButton(
+                onPressed: () async {
+                  await doPay();
+                },
+                child: Text("결제 테스트"),
+              )
+            ],
+          )),
     );
   }
 }

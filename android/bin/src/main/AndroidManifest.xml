@@ -1,0 +1,11 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="jaceshim.bootpay_flutter">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <application>
+        <activity android:name="jaceshim.bootpay_flutter.BootpayActivity"
+                  android:theme="@style/Theme.AppCompat">
+        </activity>
+    </application>
+</manifest>

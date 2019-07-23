@@ -49,6 +49,11 @@ public class BootpayActivity extends BootpayFlutterActivity {
         super.onPostResume();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
     private void bootpayRequest(PayParam params) {
         String bootpayId = params.getApplicationId();
         Log.d(TAG, "bootpayId : " + bootpayId);
