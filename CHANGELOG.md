@@ -1,3 +1,7 @@
+## [0.0.9]
+* Flutter PlatformChannel에서 발생하는 에러 fix.
+* Example 수정
+
 ## [0.0.8]
 * bootpay 미지원 method 주석처리
 
