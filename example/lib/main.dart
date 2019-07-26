@@ -18,13 +18,8 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
   }
-
-<<<<<<< HEAD
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-=======
+  
   Future<void> doPay() async {
->>>>>>> develop
     String bootpayApplicationId;
     if (Platform.isAndroid) {
       bootpayApplicationId = "59a4d326396fa607cbe75de5"; // 안드로이드용 bootpay applicationId
@@ -44,22 +39,12 @@ class _MyAppState extends State<MyApp> {
     try {
       final PayResult result = await BootpayFlutter.pay(payParam);
       if (result.action == "BootpayDone") {
-        // 결제성공
-<<<<<<< HEAD
         print("결제 성공");
-=======
-        print("사용자 결제 성공");
->>>>>>> develop
       } else if (result.action == "BootpayCancel") {
         // 사용자가 결제완료전에 결제를 중지한 상태.
         print("사용자 결제 취소");
       } else if (result.action == "BootpayError") {
-        // 결제에러
-<<<<<<< HEAD
         print("결제 에러");
-=======
-        print("사용자 결제 성공");
->>>>>>> develop
       }
       paymentResult = result.toString();
     } on Exception {

@@ -24,8 +24,7 @@ import static jaceshim.bootpay_flutter.Constans.PAY_RESULT_DATA_KEY;
  */
 public class BootpayActivity extends BootpayFlutterActivity {
     private final String TAG = this.getClass().getSimpleName();
-
-    //    private String bootpayId = "5ca5851db6d49c51471909c5";
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,13 +41,10 @@ public class BootpayActivity extends BootpayFlutterActivity {
 
     @Override
     public void onBackPressed() {
-<<<<<<< HEAD
         Map<String, String> data = new HashMap<>();
         // 결제완료전 back버튼 터치시 사용자 결제취소로 처리.
         data.put("action", "BootpayCancel");
         bindResult(new Gson().toJson(data));
-=======
->>>>>>> develop
         // back버튼 터치시 결제를 중지 상태로 처리한다. 밑에 super.onBackPressed() 결과값 설정보다 먼저 호출하면 결과값 설정이 안되니 주의요망!
         super.onBackPressed();
     }
@@ -58,52 +54,53 @@ public class BootpayActivity extends BootpayFlutterActivity {
         super.onPostResume();
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-
     private void bootpayRequest(PayParam params) {
-        String bootpayId = params.getApplicationId();
-        Log.d(TAG, "bootpayId : " + bootpayId);
-        BootpayAnalytics.init(this, bootpayId);
-        Log.d(TAG, "Bootpay 결제요청 파라미터 : " + params);
-
-        int paymentAmount = Integer.parseInt(Objects.requireNonNull(params.getPrice()));
-
-        final BootpayBuilder bootpayBuilder = Bootpay.init(getFragmentManager())
-                .setContext(this)
-                .setApplicationId(bootpayId) // 해당 프로젝트(안드로이드)의 application id 값
-                .setPG(params.getPg()) // 결제할 PG 사
-                .setMethod(getPaymentMethod(params.getMethod())) // 결제수단
-                .setName(params.getName()) // 결제할 상품명
-                .setOrderId(params.getOrderId()) // 결제 고유번호
-                .setPrice(paymentAmount) // 결제할 금액
-                .setItems(params.getItems())
-                .setBootUser(params.getUserInfo())
-                .setBootExtra(params.getExtra());
-//                .setParams(params.getParams())
-                // .isShowAgree(params.isShowAgreeWindow());
-
-        final String accountExpireAt = params.getAccountExpireAt();
-        if (accountExpireAt != null && ! accountExpireAt.isEmpty()) {
-            bootpayBuilder.setAccountExpireAt(accountExpireAt);
+        try {
+            String bootpayId = params.getApplicationId();
+            Log.d(TAG, "bootpayId : " + bootpayId);
+            BootpayAnalytics.init(this, bootpayId);
+            Log.d(TAG, "Bootpay 결제요청 파라미터 : " + params);
+    
+            int paymentAmount = Integer.parseInt(Objects.requireNonNull(params.getPrice()));
+    
+            final BootpayBuilder bootpayBuilder = Bootpay.init(getFragmentManager())
+                    .setContext(this)
+                    .setApplicationId(bootpayId) // 해당 프로젝트(안드로이드)의 application id 값
+                    .setPG(params.getPg()) // 결제할 PG 사
+                    .setMethod(getPaymentMethod(params.getMethod())) // 결제수단
+                    .setName(params.getName()) // 결제할 상품명
+                    .setOrderId(params.getOrderId()) // 결제 고유번호
+                    .setPrice(paymentAmount) // 결제할 금액
+                    .setItems(params.getItems())
+                    .setBootUser(params.getUserInfo())
+                    .setBootExtra(params.getExtra());
+    //                .setParams(params.getParams())
+                    // .isShowAgree(params.isShowAgreeWindow());
+    
+            final String accountExpireAt = params.getAccountExpireAt();
+            if (accountExpireAt != null && ! accountExpireAt.isEmpty()) {
+                bootpayBuilder.setAccountExpireAt(accountExpireAt);
+            }
+    
+            bootpayBuilder.onConfirm(this)
+                    .onDone(this)
+                    .onReady(this)
+                    .onCancel(this)
+                    .onError(this)
+                    .onClose(this)
+                    .request();
+        } catch (Exception e) {
+            Log.d("bootpay  error", e.getMessage());
+            bindResult(e.getMessage());
         }
-
-        bootpayBuilder.onConfirm(this)
-                .onDone(this)
-                .onReady(this)
-                .onCancel(this)
-                .onError(this)
-                .onClose(this)
-                .request();
+        
     }
 
     private Method getPaymentMethod(String paymentMethod) {
         if (paymentMethod == null || paymentMethod.isEmpty()) {
             return Method.SELECT;
         }
-        return Method.valueOf(paymentMethod);
+        return Method.valueOf(paymentMethod.toUpperCase());
     }
 
     @Override

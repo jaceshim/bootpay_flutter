@@ -63,9 +63,13 @@ public class BootpayFlutterPlugin implements MethodCallHandler, PluginRegistry.A
 
     @Override
     public boolean onActivityResult(int requestCode, int resultCode, Intent intent) {
+        if (requestCode != PAY_ACTIVITY_REQ_CODE) {
+            return false;
+        }
+
         Log.d(TAG, "결제처리 요청코드 " + requestCode);
         Log.d(TAG, "결제처리 결과코드 " + resultCode);
-
+        
         try {
             final String rawResultData = intent.getStringExtra(PAY_RESULT_DATA_KEY);
             Log.d(TAG, "결제처리 결과 " + rawResultData);
@@ -77,7 +81,7 @@ public class BootpayFlutterPlugin implements MethodCallHandler, PluginRegistry.A
             }
         } catch (Exception e) {
             finishWithError("결제처리 에러", e.getMessage());
-            Log.e(TAG, "bootpay 결제처리 오류 : " + e.getMessage(), e);
+            Log.d(TAG, "bootpay 결제처리 오류 : " + e.getMessage());
         }
         return true;
     }

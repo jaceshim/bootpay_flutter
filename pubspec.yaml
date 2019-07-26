@@ -1,6 +1,6 @@
 name: bootpay_flutter
 description: This plugin is payment modules of Bootpay for Flutter version.
-version: 0.0.9
+version: 0.0.12
 author: Jace Shim <jaceshim76@gmail.com>
 homepage: https://github.com/jaceshim/bootpay_flutter
 

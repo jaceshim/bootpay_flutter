@@ -59,6 +59,7 @@ class BootpayViewController: UIViewController {
         let payPrice:NSString = payParam["price"] as! NSString
 
         // 주문정보 - 실제 결제창에 반영되는 정보
+        let payMethod = payParam["method"] as? String ?? ""
         vc.params {
             $0.price = payPrice.doubleValue // 결제할 금액
             $0.name = payParam["name"] as! String // 결제할 상품명
@@ -66,7 +67,7 @@ class BootpayViewController: UIViewController {
             $0.user_info = userInfo // 구매자 정보
             $0.pg = payParam["pg"] as? String ?? ""// 결제할 PG사
             $0.phone = userInfo["phone"]!// 구매자 휴대폰 번호
-            $0.method = payParam["method"] as? String ?? ""// 결제수단
+            $0.method = payMethod.lowercased()// 결제수단
             $0.sendable = self // 이벤트를 처리할 protocol receiver
 //            $0.quotas = [0,2,3] // // 5만원 이상일 경우 할부 허용범위 설정 가능, (예제는 일시불, 2개월 할부, 3개월 할부 허용)
         }
