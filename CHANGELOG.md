@@ -1,11 +1,7 @@
-## [0.0.12]
+## [1.0.0]
 * payment method가 대문자로 치환하여 적용하도록 변경
-* bootpay실행부분 exception  catch 되도록 변
-
-## [0.0.11]
+* bootpay실행부분 exception  catch 되도록 변경
 * ios에서 결제수단을 무조건 소문자로 치환하여 처리되도록 수정.
-
-## [0.0.10]
 * android onActivityResult 수행시 결제모듈로 실행될 경우에만 MethodChannel로 응답처리되게 수정.
 
 ## [0.0.9]
