@@ -36,12 +36,12 @@ class BootpayFlutter {
         paymentGroup: result["payment_group"],
         paymentGroupName: result["payment_group_name"],
         requestedAt: result["requested_at"],
-				bankcode: result["bankcode"],
-				bankname: result["bankname"],
-				username: result["username"],
-				accounthodler: result["accounthodler"],
-				account: result["account"],
-				expiredate: result["expiredate"],
+        bankcode: result["bankcode"],
+        bankname: result["bankname"],
+        username: result["username"],
+        accounthodler: result["accounthodler"],
+        account: result["account"],
+        expiredate: result["expiredate"],
       );
     }
 
@@ -169,7 +169,7 @@ class PayResult {
   String username;
   String accounthodler;
   String account;
-  DateTime expiredate;
+  String expiredate;
 
   PayResult({
     this.status,
@@ -196,7 +196,7 @@ class PayResult {
     this.requestedAt,
     this.bankcode,
     this.bankname,
-		this.username,
+    this.username,
     this.accounthodler,
     this.account,
     this.expiredate,
