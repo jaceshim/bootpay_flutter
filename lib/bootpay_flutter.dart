@@ -5,8 +5,7 @@ import 'package:flutter/services.dart';
 
 /// Bootpay payment modules for Flutter
 class BootpayFlutter {
-  static const MethodChannel _channel =
-      const MethodChannel('jaceshim/bootpay_flutter');
+  static const MethodChannel _channel = const MethodChannel('jaceshim/bootpay_flutter');
 
   static Future<PayResult> pay(PayParam payParam) async {
     final Map<dynamic, dynamic> result = await _channel.invokeMethod(
@@ -37,6 +36,12 @@ class BootpayFlutter {
         paymentGroup: result["payment_group"],
         paymentGroupName: result["payment_group_name"],
         requestedAt: result["requested_at"],
+				bankcode: result["bankcode"],
+				bankname: result["bankname"],
+				username: result["username"],
+				accounthodler: result["accounthodler"],
+				account: result["account"],
+				expiredate: result["expiredate"],
       );
     }
 
@@ -102,8 +107,7 @@ class PayParam {
         this.pg = json["pg"],
         this.method = json["method"],
         this.showAgreeWindow = json["showAgreeWindow"],
-        this.items =
-            (json["items"] as List).map((i) => Item.fromJson(i)).toList(),
+        this.items = (json["items"] as List).map((i) => Item.fromJson(i)).toList(),
         this.userInfo = UserInfo.fromJson(json["userInfo"]),
         this.orderId = json["orderId"],
         this.params = jsonDecode(json["params"]),
@@ -160,6 +164,12 @@ class PayResult {
   String paymentGroup;
   String paymentGroupName;
   String requestedAt;
+  String bankcode;
+  String bankname;
+  String username;
+  String accounthodler;
+  String account;
+  DateTime expiredate;
 
   PayResult({
     this.status,
@@ -184,11 +194,17 @@ class PayResult {
     this.paymentGroup,
     this.paymentGroupName,
     this.requestedAt,
+    this.bankcode,
+    this.bankname,
+		this.username,
+    this.accounthodler,
+    this.account,
+    this.expiredate,
   });
 
   @override
   String toString() {
-    return 'PayResult{status: $status, action: $action, receiptId: $receiptId, amount: $amount, cardNo: $cardNo, cardCode: $cardCode, cardName: $cardName, cardQuota: $cardQuota, params: $params, itemName: $itemName, orderId: $orderId, url: $url, price: $price, taxFee: $taxFee, paymentName: $paymentName, pgName: $pgName, pg: $pg, method: $method, methodName: $methodName, paymentGroup: $paymentGroup, paymentGroupName: $paymentGroupName, requestedAt: $requestedAt}';
+    return 'PayResult{status: $status, action: $action, receiptId: $receiptId, amount: $amount, cardNo: $cardNo, cardCode: $cardCode, cardName: $cardName, cardQuota: $cardQuota, params: $params, itemName: $itemName, orderId: $orderId, url: $url, price: $price, taxFee: $taxFee, paymentName: $paymentName, pgName: $pgName, pg: $pg, method: $method, methodName: $methodName, paymentGroup: $paymentGroup, paymentGroupName: $paymentGroupName, requestedAt: $requestedAt, bankcode: $bankcode, bankname: $bankname, username: $username, accounthodler: $accounthodler, account: $account, expiredate: $expiredate}';
   }
 }
 
@@ -250,14 +266,7 @@ class Item {
   /// 대표상품의 카테고리 하, 50글자 이내
   String cat3;
 
-  Item(
-      {this.itemName,
-      this.qty,
-      this.unique,
-      this.price,
-      this.cat1,
-      this.cat2,
-      this.cat3});
+  Item({this.itemName, this.qty, this.unique, this.price, this.cat1, this.cat2, this.cat3});
 
   Item.fromJson(Map<String, dynamic> json)
       : this.itemName = json["itemName"],
@@ -336,9 +345,3 @@ enum PG {
   PAYLETTER,
   BOOTPAY,
 }
-
-/// 결제취소 파라미터
-class CancelParam {}
-
-/// 결제취소 결과
-class CancelResult {}
