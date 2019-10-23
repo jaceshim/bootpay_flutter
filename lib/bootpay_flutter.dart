@@ -12,6 +12,7 @@ class BootpayFlutter {
       "doPay",
       payParam.toJson(),
     );
+    String resultJson = json.encode(result);
 
     if (result != null) {
       return PayResult(
@@ -42,6 +43,7 @@ class BootpayFlutter {
         accounthodler: result["accounthodler"],
         account: result["account"],
         expiredate: result["expiredate"],
+        resultJson: resultJson,
       );
     }
 
@@ -86,19 +88,7 @@ class PayParam {
 
   Extra extra;
 
-  PayParam(
-      {this.price,
-      this.applicationId,
-      this.name,
-      this.pg = "",
-      this.method = "",
-      this.showAgreeWindow = false,
-      this.items = const [],
-      this.userInfo,
-      this.orderId,
-      this.params,
-      this.accountExpireAt,
-      this.extra});
+  PayParam({this.price, this.applicationId, this.name, this.pg = "", this.method = "", this.showAgreeWindow = false, this.items = const [], this.userInfo, this.orderId, this.params, this.accountExpireAt, this.extra});
 
   PayParam.fromJson(Map<String, dynamic> json)
       : this.price = json["price"],
@@ -170,6 +160,7 @@ class PayResult {
   String accounthodler;
   String account;
   String expiredate;
+  String resultJson;
 
   PayResult({
     this.status,
@@ -200,11 +191,12 @@ class PayResult {
     this.accounthodler,
     this.account,
     this.expiredate,
+    this.resultJson,
   });
 
   @override
   String toString() {
-    return 'PayResult{status: $status, action: $action, receiptId: $receiptId, amount: $amount, cardNo: $cardNo, cardCode: $cardCode, cardName: $cardName, cardQuota: $cardQuota, params: $params, itemName: $itemName, orderId: $orderId, url: $url, price: $price, taxFee: $taxFee, paymentName: $paymentName, pgName: $pgName, pg: $pg, method: $method, methodName: $methodName, paymentGroup: $paymentGroup, paymentGroupName: $paymentGroupName, requestedAt: $requestedAt, bankcode: $bankcode, bankname: $bankname, username: $username, accounthodler: $accounthodler, account: $account, expiredate: $expiredate}';
+    return 'PayResult{status: $status, action: $action, receiptId: $receiptId, amount: $amount, cardNo: $cardNo, cardCode: $cardCode, cardName: $cardName, cardQuota: $cardQuota, params: $params, itemName: $itemName, orderId: $orderId, url: $url, price: $price, taxFee: $taxFee, paymentName: $paymentName, pgName: $pgName, pg: $pg, method: $method, methodName: $methodName, paymentGroup: $paymentGroup, paymentGroupName: $paymentGroupName, requestedAt: $requestedAt, bankcode: $bankcode, bankname: $bankname, username: $username, accounthodler: $accounthodler, account: $account, expiredate: $expiredate, resultJson: $resultJson}';
   }
 }
 
