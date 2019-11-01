@@ -15,7 +15,7 @@ Bootpay payment moudle for flutter
   s.source_files = 'Classes/**/*'
   s.public_header_files = 'Classes/**/*.h'
   s.dependency 'Flutter'
-  s.dependency 'SwiftyBootpay', '2.1.18'
+  s.dependency 'SwiftyBootpay', '3.0.492'
 
   s.static_framework = true
 
